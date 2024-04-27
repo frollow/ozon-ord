@@ -1,3 +1,4 @@
+from ozon_ord.client import OzonORDClient
 from ozon_ord.invoice import Invoice
 from ozon_ord.models import (
     InvoiceRequestData,
@@ -10,6 +11,8 @@ from ozon_ord.models import (
     CreativeUnlinkItem,
     CreativeInvoiceLinkQuery,
 )
+
+OzonORDClient.set_environment(environment="TEST")
 
 # Зарегистрировать или обновить данные акта (версия 2)
 invoice_data = InvoiceRequestData(

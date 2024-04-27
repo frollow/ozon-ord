@@ -1,5 +1,8 @@
+from ozon_ord.client import OzonORDClient
 from ozon_ord.file import File
 from ozon_ord.models import FileUploadData
+
+OzonORDClient.set_environment(environment="TEST")
 
 # Загрузка файла
 upload_data = FileUploadData(

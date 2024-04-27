@@ -1,3 +1,4 @@
+from ozon_ord.client import OzonORDClient
 from ozon_ord.platform import Platform
 from ozon_ord.models import (
     PlatformData,
@@ -7,6 +8,9 @@ from ozon_ord.models import (
     PlatformCursor,
     UpdatedAt,
 )
+
+
+OzonORDClient.set_environment(environment="TEST")
 
 
 # Регистрация или обновление данных площадки

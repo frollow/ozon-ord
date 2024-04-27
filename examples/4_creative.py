@@ -1,3 +1,4 @@
+from ozon_ord.client import OzonORDClient
 from ozon_ord.creative import Creative
 from ozon_ord.models import (
     CreativeData,
@@ -7,6 +8,8 @@ from ozon_ord.models import (
     CreativesListRequest,
     ExternalCursorCreative,
 )
+
+OzonORDClient.set_environment(environment="TEST")
 
 # Регистрация или обновление данных креатива (версия 2)
 # Текстовый блок, без прикрепленных файлов

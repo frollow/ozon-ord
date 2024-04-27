@@ -1,3 +1,4 @@
+from ozon_ord.client import OzonORDClient
 from ozon_ord.organisation import Organisation
 from ozon_ord.models import (
     OrganisationData,
@@ -7,6 +8,7 @@ from ozon_ord.models import (
     ExternalCursorOrg,
 )
 
+OzonORDClient.set_environment(environment="TEST")
 
 # Регистрация или обновление данных контрагента
 organisation_data = OrganisationData(

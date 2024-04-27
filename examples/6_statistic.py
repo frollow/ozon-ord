@@ -1,3 +1,4 @@
+from ozon_ord.client import OzonORDClient
 from ozon_ord.statistic import Statistic
 from ozon_ord.models import (
     StatisticList,
@@ -5,6 +6,8 @@ from ozon_ord.models import (
     StatisticListRequest,
     ExternalCursorStatistic,
 )
+
+OzonORDClient.set_environment(environment="TEST")
 
 # Добавить статистику (и изменить)
 statistics_data = StatisticList(

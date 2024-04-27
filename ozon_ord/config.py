@@ -1,8 +1,25 @@
 class Config:
     SETTINGS = {
-        "ENVIRONMENT": {
-            "base_url": "https://ord-sandbox.ozon.ru",
-            "api_key": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3Mjc1NTcyMDAsImp0aSI6IjQxMCIsImlhdCI6MTcxMzI5MDkxMCwiaXNzIjoiMjY4MSIsInN1YiI6IjE3NTAifQ.qAD7sYdKyDxIsMtzZxr8xkhhR5Dm3FKMZjPBJY9w0hgczWRNsgfYqPEEknMvd3WmOm26M3-yXYYRAxXcrENuSQ",
+        "PROD": {
+            "base_url": "https://ord.ozon.ru",
+            "api_key": "api_key_production",
             "bucket": "media",
-        }
+        },
+        "TEST": {
+            "base_url": "https://ord-sandbox.ozon.ru",
+            "api_key": "api_key_production",
+            "bucket": "media",
+        },
     }
+
+    @classmethod
+    def set_api_key(cls, key: str, environment: str = "PROD"):
+        cls.SETTINGS[environment]["api_key"] = key
+
+    @classmethod
+    def set_base_url(cls, url: str, environment: str = "PROD"):
+        cls.SETTINGS[environment]["base_url"] = url
+
+    @classmethod
+    def set_bucket(cls, bucket: str, environment: str = "PROD"):
+        cls.SETTINGS[environment]["bucket"] = bucket

@@ -1,3 +1,4 @@
+from ozon_ord.client import OzonORDClient
 from ozon_ord.dictionary import Dictionary
 from ozon_ord.models import (
     BankDictionaryRequest,
@@ -5,6 +6,8 @@ from ozon_ord.models import (
     FiasDictionaryRequest,
     OkvedDictionaryRequest,
 )
+
+OzonORDClient.set_environment(environment="TEST")
 
 # Справочник с данными банков (поиск для одного банка по БИК)
 request_data = BankDictionaryRequest(search="044525652", pageSize=5)

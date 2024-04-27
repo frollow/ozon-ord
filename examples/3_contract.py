@@ -1,9 +1,12 @@
+from ozon_ord.client import OzonORDClient
 from ozon_ord.contract import Contract
 from ozon_ord.models import (
     ContractData,
     ContractsListRequest,
     ExternalCursorContract,
 )
+
+OzonORDClient.set_environment(environment="TEST")
 
 # Регистрация или обновление данных договора
 contract_data = ContractData(

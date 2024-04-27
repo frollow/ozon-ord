@@ -13,25 +13,31 @@ from .models import (
 class OzonORDClient:
     """Базовый класс клиента для взаимодействия с API Ozon ORD."""
 
+    _environment = "PROD"
+
     @classmethod
-    def get_base_url(cls, environment="ENVIRONMENT"):
+    def set_environment(cls, environment):
+        cls._environment = environment
+
+    @classmethod
+    def get_base_url(cls):
         """Получение базового URL из конфигурации для указанного окружения."""
-        return Config.SETTINGS[environment]["base_url"]
+        return Config.SETTINGS[cls._environment]["base_url"]
 
     @classmethod
-    def get_api_key(cls, environment="ENVIRONMENT"):
-        """Получение API ключа из конфигурации для указанного окружения."""
-        return Config.SETTINGS[environment]["api_key"]
+    def get_api_key(cls):
+        """Получение API ключа из конфигурации или установленного значения."""
+        return Config.SETTINGS[cls._environment]["api_key"]
 
     @classmethod
-    def get_bucket(cls, environment="ENVIRONMENT"):
+    def get_bucket(cls):
         """Получение значения bucket из конфигурации для указанного окружения."""
-        return Config.SETTINGS[environment]["bucket"]
+        return Config.SETTINGS[cls._environment]["bucket"]
 
     @classmethod
-    def get_headers(cls, environment="ENVIRONMENT"):
+    def get_headers(cls):
         """Формирование заголовков для запроса."""
-        api_key = cls.get_api_key(environment)
+        api_key = cls.get_api_key()
         return {"Authorization": f"Bearer {api_key}"}
 
     @classmethod
@@ -42,13 +48,12 @@ class OzonORDClient:
         data=None,
         files=None,
         headers=None,
-        environment="ENVIRONMENT",
         raw_response=False,
     ):
         """Отправка HTTP запроса к API."""
-        base_url = cls.get_base_url(environment)
+        base_url = cls.get_base_url()
         url = f"{base_url}{endpoint}"
-        request_headers = cls.get_headers(environment)
+        request_headers = cls.get_headers()
         request_headers.update(headers or {})
         if not files:
             request_headers["Content-Type"] = "application/json"
@@ -84,7 +89,7 @@ class OzonORDClient:
         return filename, extension
 
     @classmethod
-    def upload_file(cls, bucket, file_url, environment="ENVIRONMENT"):
+    def upload_file(cls, bucket, file_url):
         filename, extension = cls.extract_filename_and_extension(file_url)
         full_filename = str(filename)
         if not extension:
@@ -104,6 +109,4 @@ class OzonORDClient:
                     )
                 }
                 endpoint = f"/api/external/file/{bucket}"
-                return cls.request(
-                    "POST", endpoint, files=files, environment=environment
-                )
+                return cls.request("POST", endpoint, cls._environment, files=files)

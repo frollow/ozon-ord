@@ -1,5 +1,8 @@
+from ozon_ord.client import OzonORDClient
 from ozon_ord.deletion import Deletion
 from ozon_ord.models import DeleteOperationRequest, DeleteItemRequest
+
+OzonORDClient.set_environment(environment="TEST")
 
 # Создать запрос на удаление
 delete_request = DeleteOperationRequest(
