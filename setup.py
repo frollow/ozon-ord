@@ -15,7 +15,7 @@ setup(
     description="Ozon ОРД API - Python",
     long_description=readme(),
     long_description_content_type="text/markdown",
-    url="https://github.com/frollow/ozon-ord",
+    url="https://github.com/frollow/ozon_ord",
     package_dir={"": "ozon_ord"},
     packages=find_packages("ozon_ord"),
     install_requires=["requests>=2.31.0", "pydantic>=2.7.0"],
